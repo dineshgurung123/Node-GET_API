@@ -1,25 +1,25 @@
- const express = require ('express');
 
-  var app  =  express();
+require ('dotenv').config();
+const express = require('express');
+const connectToDataBase = require('./Database/index.js')
 
+const app = express();
 
-app.get('/', (req, res)=>{
+connectToDataBase();
+// Define routes
+app.get('/', (req, res) => {
+    res.status(200).json({
+        message: "This is the home page"
+    });
+});
 
-    res.json({
+app.get('/about', (req, res) => {
+    res.status(200).json({
+        message: "This is the about page"
+    });
+});
 
-        message: "This is home page"
-    })
-})
-
-app.get('/about', (req, res)=>{
-    res.json({
-        message :"This is about page"
-    })
-})
-
-
-
-  app.listen(5000, ()=>{
-   
-    console.log("Hello node");
-  })
+// Start the server
+app.listen(process.env.PORT, () => {
+    console.log("Server running on port 5000");
+});
