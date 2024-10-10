@@ -4,6 +4,7 @@ const express = require('express');
 const connectToDataBase = require('./Database/index.js')
 
 const app = express();
+app.use(express.json())
 
 connectToDataBase();
 // Define routes
@@ -13,11 +14,14 @@ app.get('/', (req, res) => {
     });
 });
 
-app.get('/about', (req, res) => {
-    res.status(200).json({
-        message: "This is the about page"
-    });
-});
+app.post('/blog', (req, res) => {
+console.log(req.body);
+res.status(200).json({
+    message : "Blog successful"
+})
+
+})
+
 
 // Start the server
 app.listen(process.env.PORT, () => {
