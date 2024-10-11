@@ -12,7 +12,7 @@ const mongoose = require('mongoose')
     },
 
     description : {
-     type : Text
+     type : String
 
     },
 
