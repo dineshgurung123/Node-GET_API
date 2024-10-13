@@ -26,6 +26,12 @@ app.post('/blog', upload.single('image') ,async(req, res) => {
 // const description = req.body.description
 // const image = req.body.image
 
+console.log(req.body);
+console.log(req.file);
+
+const filename = req.file.filename;
+
+
 const {title, subtitle, description} = req.body
 const image = req.file
 
@@ -41,7 +47,7 @@ try {
         title : title,
         subtitle : subtitle,
         description : description,
-        image : image.path
+        image : filename
      
          
      })
@@ -60,6 +66,18 @@ res.status(200).json({
     message : "Blog successful"
 })
 
+})
+
+app.get("/blog", async(req, res)=>{
+
+ const blogs = await Blog.find() //returns data in array
+  
+ res.status(200).json ({
+
+message : 'Blog fetched successfully',
+data : blogs
+
+ })
 })
 
 
